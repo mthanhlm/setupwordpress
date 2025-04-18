@@ -1,3 +1,15 @@
+/**
+ * Remove default sidebar and add custom shop sidebar
+ */
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+add_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar_bingo', 11 );
+function woocommerce_get_sidebar_bingo() {
+	if( is_shop() || is_product_category() ){
+		echo '<div id="sidebar" role="complementary">';
+		dynamic_sidebar( 'shop' );
+		echo '</div>';
+	}
+}
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'wc_refresh_mini_cart_count');
 function wc_refresh_mini_cart_count($fragments){
